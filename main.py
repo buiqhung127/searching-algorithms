@@ -4,6 +4,7 @@ from generate_map import *
 
 class config : 
     input_file = 'input.txt' 
+    agent_move = [[0, 1], [0, -1], [1, 0], [-1, 0]]
 
 
 def read_file(file_name) : 
@@ -33,4 +34,4 @@ def read_file(file_name) :
     return map_shape, source, goal, num_obstacles, obstacles   
 if __name__ == '__main__' : 
     map_shape, source, goal, num_obstacles, obstacles = read_file(config.input_file)
-    print(obstacles)
+    
