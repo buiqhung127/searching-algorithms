@@ -1,7 +1,7 @@
 import turtle
 import numpy as np
 from generate_map import *
-from searching_algorithms import breadth_first_search
+from searching_algorithms import breadth_first_search, uniform_cost_search, greedy_best_first_search, graph_search_asterisk
 
 class config : 
     input_file = 'input.txt' 
@@ -32,15 +32,36 @@ def read_file(file_name) :
             obstacle.append((x, y))
         obstacles.append(obstacle)
     return map_shape, source, goal, num_obstacles, obstacles   
+
+
 if __name__ == '__main__' : 
     map_shape, source, goal, num_obstacles, obstacles = read_file(config.input_file)
     ground = generate_ground(map_shape, source, goal, num_obstacles, obstacles)
-    # final_ground = np.zeros((ground.shape[1], ground.shape[0]))
-    # for i in range(final_ground.shape[0]) :
-    #     for j in range(final_ground.shape[1]) : 
-    #         final_ground[i][j] = ground[j][i]
-    # print(final_ground.astype(int))    
-    print(ground)
-    ground = breadth_first_search(ground, source, goal)
-    print(ground)
-    
+    # ground_1 = breadth_first_search(ground, source, goal)
+    # print(ground_1)
+    # ground_2 = uniform_cost_search(ground, source, goal)
+    # print(ground_2)
+    # ground_3 = greedy_best_first_search(ground, source, goal)
+    # print(ground_3)
+    ground_4 = graph_search_asterisk(ground, source, goal)
+    print(ground_4)
+    # heap = MaxHeap()
+    # heap.insert(3)
+    # heap.insert(2)
+    # heap.insert(4)
+    # heap.insert(8)
+    # heap.insert(1)
+    # heap.insert(7)
+    # heap.insert(2)
+    # heap.insert(11)
+    # heap.insert(8)
+    # heap.insert(12)
+    # heap.insert(9)
+
+
+    # print(heap.heap)
+    # for i in range(len(heap.heap)//2):
+    #     print(heap.heap[i], heap.heap[2*i +1], heap.heap[2* i + 2])
+    # for i in range(11):
+    #     print(heap.head(), end=' ')
+    #     heap.pop()
