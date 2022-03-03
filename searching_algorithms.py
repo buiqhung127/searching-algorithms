@@ -1,5 +1,8 @@
 import numpy as np
 
+class searching_config : 
+    agent_move = [[0, 1], [0, -1], [1, 0], [-1, 0]]
+    is_visited = np.zeros((M, N))
 
 class SimplifiedQueue : 
     def __init__(self, M, N) :
@@ -20,5 +23,5 @@ class SimplifiedQueue :
         self.head_pointer += 1
 
 
-def bread_first_search() : 
+def breadth_first_search(current_position, ground) : 
     pass

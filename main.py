@@ -1,10 +1,10 @@
 import turtle
 import numpy as np
 from generate_map import *
+# from searching_algorithms import *
 
 class config : 
     input_file = 'input.txt' 
-    agent_move = [[0, 1], [0, -1], [1, 0], [-1, 0]]
 
 
 def read_file(file_name) : 
@@ -17,7 +17,7 @@ def read_file(file_name) :
     for i in range(len(new_lines)) : 
         for j in range(len(new_lines[i])) : 
             new_lines[i][j] = int(new_lines[i][j])
-    map_shape = new_lines[0][0], new_lines[0][1]
+    map_shape = new_lines[0][0] + 1, new_lines[0][1] + 1 # width height
     source = (new_lines[1][0], new_lines[1][1])
     goal = (new_lines[1][2], new_lines[1][3])
     num_obstacles = new_lines[2][0]
@@ -34,4 +34,11 @@ def read_file(file_name) :
     return map_shape, source, goal, num_obstacles, obstacles   
 if __name__ == '__main__' : 
     map_shape, source, goal, num_obstacles, obstacles = read_file(config.input_file)
+    ground = generate_ground(map_shape, source, goal, num_obstacles, obstacles)
+    # final_ground = np.zeros((ground.shape[1], ground.shape[0]))
+    # for i in range(final_ground.shape[0]) :
+    #     for j in range(final_ground.shape[1]) : 
+    #         final_ground[i][j] = ground[j][i]
+    # print(final_ground.astype(int))    
+    print(ground)
     
