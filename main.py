@@ -1,7 +1,7 @@
 import turtle
 import numpy as np
 from generate_map import *
-# from searching_algorithms import *
+from searching_algorithms import breadth_first_search
 
 class config : 
     input_file = 'input.txt' 
@@ -40,5 +40,7 @@ if __name__ == '__main__' :
     #     for j in range(final_ground.shape[1]) : 
     #         final_ground[i][j] = ground[j][i]
     # print(final_ground.astype(int))    
+    print(ground)
+    ground = breadth_first_search(ground, source, goal)
     print(ground)
     
