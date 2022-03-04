@@ -1,7 +1,7 @@
-import turtle
 import numpy as np
 from generate_map import *
 from searching_algorithms import breadth_first_search, uniform_cost_search, greedy_best_first_search, graph_search_asterisk, iterative_deepening_search
+from visualization import visualize_map
 
 class config : 
     input_file = 'input.txt' 
@@ -43,10 +43,11 @@ if __name__ == '__main__' :
     # print(ground_2)
     # ground_3 = greedy_best_first_search(ground, source, goal)
     # print(ground_3)
-    # ground_4 = graph_search_asterisk(ground, source, goal)
-    # print(ground_4)
-    ground_5 = iterative_deepening_search(ground, source, goal)
-    print(ground_5)
+    ground_4 = graph_search_asterisk(ground, source, goal)
+    print(ground_4)
+    visualize_map(ground_4)
+    # ground_5 = iterative_deepening_search(ground, source, goal)
+    # print(ground_5)
     # heap = MaxHeap()
     # heap.insert(3)
     # heap.insert(2)

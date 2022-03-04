@@ -3,6 +3,7 @@ import numpy as np
 class searching_config: 
     agent_move = [[0, 1], [0, -1], [1, 0], [-1, 0]]
     cost_per_move = 1
+    path_notation = 2
 
 
     # config for id search
@@ -10,10 +11,6 @@ class searching_config:
         M, N = ground.shape
         self.is_visited = ground < 0 
         self.tracing_map = np.full((M, N), 0, dtype='int,int')
-    # def reset(self, ground) : 
-    #     M, N = ground.shape
-    #     self.is_visited = ground < 0 
-    #     self.tracing_map = np.full((M, N), 0, dtype='int,int')
 
 class SimplifiedQueue : 
     def __init__(self) :
@@ -67,8 +64,7 @@ def breadth_first_search(ground, source, goal) :
     if goal_found : 
         tracer = config.tracing_map[goal[0]][goal[1]]
         while tracer[0] != -1 and tracer[1] != -1:
-            print(tracer)
-            ground[tracer[0]][tracer[1]] = 2
+            ground[tracer[0]][tracer[1]] = config.path_notation
             tracer = config.tracing_map[tracer[0]][tracer[1]]
     return ground
 
@@ -141,8 +137,7 @@ def uniform_cost_search(ground, source, goal) :
     if goal_found : 
         tracer = config.tracing_map[goal[0]][goal[1]]
         while tracer[0] != -1 and tracer[1] != -1:
-            print(tracer)
-            ground[tracer[0]][tracer[1]] = 2
+            ground[tracer[0]][tracer[1]] = config.path_notation
             tracer = config.tracing_map[tracer[0]][tracer[1]]
     return ground
 def manhattan_distance(first_point, second_point) : 
@@ -184,7 +179,7 @@ def greedy_best_first_search(ground, source, goal) :
         tracer = config.tracing_map[goal[0]][goal[1]]
         while tracer[0] != -1 and tracer[1] != -1:
             print(tracer)
-            ground[tracer[0]][tracer[1]] = 2
+            ground[tracer[0]][tracer[1]] = config.path_notation
             tracer = config.tracing_map[tracer[0]][tracer[1]]
     return ground
 
@@ -224,7 +219,7 @@ def graph_search_asterisk(ground, source, goal) : # graph search asterisk
         tracer = config.tracing_map[goal[0]][goal[1]]
         while tracer[0] != -1 and tracer[1] != -1:
             print(tracer)
-            ground[tracer[0]][tracer[1]] = 2
+            ground[tracer[0]][tracer[1]] = config.path_notation
             tracer = config.tracing_map[tracer[0]][tracer[1]]
     return ground
 
@@ -265,7 +260,7 @@ def iterative_deepening_search(ground, source, goal) :
         if temporary_found_goal:
             print(temporary_tracer)
             for i, point in enumerate(temporary_tracer):
-                ground[point[0]][point[1]] = 2
+                ground[point[0]][point[1]] = config.path_notation
             return ground
 
 

@@ -5,14 +5,14 @@ def generate_ground(map_shape, source, goal, num_obstacles, obstacles):
     ground = np.zeros(map_shape).astype(int)
     ground[source[0], source[1]] = 1
     ground[goal[0], goal[1]] = 2
-    for i in range(num_obstacles) : 
+    for i in range(num_obstacles) : # original obstacle
         obs = obstacles[i]
         for ob in obs : 
-            ground[ob[0], ob[1]] = -1
-    for i in range(map_shape[0]) : 
+            ground[ob[0], ob[1]] = -2
+    for i in range(map_shape[0]) : # boundary
         ground[i][0] = -1 
         ground[i][map_shape[1] - 1] = -1
-    for i in range(map_shape[1]) : 
+    for i in range(map_shape[1]) : # boundary
         ground[0][i] = -1 
         ground[map_shape[0] - 1][i] = -1
     ground = draw_edges(ground, num_obstacles, obstacles)
@@ -41,7 +41,7 @@ def draw_edges(ground, num_obstacles, obstacles) :
                     y_c += 1
                 elif y_c > y_e :  
                     y_c -= 1
-                ground[x_c][y_c] = -1 
+                ground[x_c][y_c] = -3
                 current_point = (x_c, y_c)
     # for i in range(num_obstacles) : 
     #     obs = obstacles[i]
