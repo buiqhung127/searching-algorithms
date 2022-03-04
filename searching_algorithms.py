@@ -66,6 +66,7 @@ def breadth_first_search(ground, source, goal) :
         while tracer[0] != -1 and tracer[1] != -1:
             ground[tracer[0]][tracer[1]] = config.path_notation
             tracer = config.tracing_map[tracer[0]][tracer[1]]
+
     return ground
 
 class MaxHeap() : 

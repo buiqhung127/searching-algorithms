@@ -39,32 +39,20 @@ if __name__ == '__main__' :
     ground = generate_ground(map_shape, source, goal, num_obstacles, obstacles)
     # ground_1 = breadth_first_search(ground, source, goal)
     # print(ground_1)
+    # visualize_map(ground_1)
     # ground_2 = uniform_cost_search(ground, source, goal)
     # print(ground_2)
+    # visualize_map(ground_2)
     # ground_3 = greedy_best_first_search(ground, source, goal)
     # print(ground_3)
+    # visualize_map(ground_3)
     ground_4 = graph_search_asterisk(ground, source, goal)
     print(ground_4)
-    visualize_map(ground_4)
+    # visualize_map(ground_4)
+    visualize_map(ground_4, source, goal, num_obstacles, obstacles)
     # ground_5 = iterative_deepening_search(ground, source, goal)
     # print(ground_5)
-    # heap = MaxHeap()
-    # heap.insert(3)
-    # heap.insert(2)
-    # heap.insert(4)
-    # heap.insert(8)
-    # heap.insert(1)
-    # heap.insert(7)
-    # heap.insert(2)
-    # heap.insert(11)
-    # heap.insert(8)
-    # heap.insert(12)
-    # heap.insert(9)
-
-
-    # print(heap.heap)
-    # for i in range(len(heap.heap)//2):
-    #     print(heap.heap[i], heap.heap[2*i +1], heap.heap[2* i + 2])
-    # for i in range(11):
-    #     print(heap.head(), end=' ')
-    #     heap.pop()
+    # visualize_map(ground_5)
+    # starting point
+    # obstacle point
+    # grid : done
