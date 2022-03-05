@@ -179,7 +179,6 @@ def greedy_best_first_search(ground, source, goal) :
     if goal_found : 
         tracer = config.tracing_map[goal[0]][goal[1]]
         while tracer[0] != -1 and tracer[1] != -1:
-            print(tracer)
             ground[tracer[0]][tracer[1]] = config.path_notation
             tracer = config.tracing_map[tracer[0]][tracer[1]]
     return ground
@@ -219,7 +218,6 @@ def graph_search_asterisk(ground, source, goal) : # graph search asterisk
     if goal_found : 
         tracer = config.tracing_map[goal[0]][goal[1]]
         while tracer[0] != -1 and tracer[1] != -1:
-            print(tracer)
             ground[tracer[0]][tracer[1]] = config.path_notation
             tracer = config.tracing_map[tracer[0]][tracer[1]]
     return ground
@@ -232,7 +230,6 @@ def depth_limited_first_search(current_point, current_depth, depth_limit, goal, 
     for step in config.agent_move :   
         new_step_x = current_point[0] + step[0]
         new_step_y = current_point[1] + step[1]
-        # print(new_step_x, new_step_y)
         if config.is_visited[new_step_x][new_step_y] == 0:
             config.is_visited[new_step_x][new_step_y] = 1
             temporary_tracer = tracer  
@@ -254,12 +251,10 @@ def iterative_deepening_search(ground, source, goal) :
     for depth_limit in range(max_deep):
         config = searching_config(ground)
         config.is_visited[x][y] = 1
-        # print('loz')
         current_depth = 0
         current_point = source
         temporary_found_goal, temporary_tracer = depth_limited_first_search(current_point, current_depth, depth_limit, goal, [], config)
         if temporary_found_goal:
-            print(temporary_tracer)
             for i, point in enumerate(temporary_tracer):
                 ground[point[0]][point[1]] = config.path_notation
             return ground

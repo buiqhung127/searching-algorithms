@@ -2,9 +2,13 @@ import turtle as t
 import time as ti
 from tkinter import *  # Python 3
 
+
+def visualization_initialize():
+    t.speed(10)
+    t.pensize(1)
+
 def rectangle(hor, ver, col):
-    t.pendown() 
-    t.pensize(1) 
+    t.pendown()  
     t.color('black')
     t.begin_fill()
     for counter in range(1,3): 
@@ -22,10 +26,9 @@ def visualize_map(ground, source, goal, num_obstacles, obstacles):
     
     for i in range(num_obstacles):
         for j in range(len(obstacles[i])):
-            print(obstacles[i][j][0])
             ground[obstacles[i][j][0]][obstacles[i][j][1]] = -2 
 
-    t.speed(10)
+    
     t.penup()
     t.pensize(1)
     t.goto(0,0)

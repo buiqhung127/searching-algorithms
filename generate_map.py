@@ -43,8 +43,4 @@ def draw_edges(ground, num_obstacles, obstacles) :
                     y_c -= 1
                 ground[x_c][y_c] = -3
                 current_point = (x_c, y_c)
-    # for i in range(num_obstacles) : 
-    #     obs = obstacles[i]
-    #     for ob in obs : 
-    #         ground[ob[0], ob[1]] = -2
     return ground

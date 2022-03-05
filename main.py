@@ -1,7 +1,7 @@
 import numpy as np
 from generate_map import *
 from searching_algorithms import breadth_first_search, uniform_cost_search, greedy_best_first_search, graph_search_asterisk, iterative_deepening_search
-from visualization import visualize_map
+from visualization import visualize_map, visualization_initialize
 
 class config : 
     input_file = 'input.txt' 
@@ -35,8 +35,32 @@ def read_file(file_name) :
 
 
 if __name__ == '__main__' : 
+    visualization_initialize()
     map_shape, source, goal, num_obstacles, obstacles = read_file(config.input_file)
+
     ground = generate_ground(map_shape, source, goal, num_obstacles, obstacles)
+    print('Please choose algorithms to visualization :')
+    print('1. Breadth-first search')
+    print('2. Uniform-cost search')
+    print('3. Iterative deepening search')
+    print('4. Greedy-best first search')
+    print('5. Graph-search A*')
+    print('0. Quit')
+    cmd = input('>>')
+
+    if cmd == '1':
+        new_ground = breadth_first_search(ground, source, goal) 
+    elif cmd == '2':
+        new_ground = uniform_cost_search(ground, source, goal)
+    elif cmd == '3':
+        new_ground = iterative_deepening_search(ground, source, goal)
+    elif cmd == '4':
+        new_ground = greedy_best_first_search(ground, source, goal)
+    elif cmd == '5':
+        new_ground = graph_search_asterisk(ground, source, goal)
+    print('Visualization in progress!')
+    visualize_map(new_ground, source, goal, num_obstacles, obstacles)        
+    print('Visualization in done!')
     # ground_1 = breadth_first_search(ground, source, goal)
     # print(ground_1)
     # visualize_map(ground_1)
@@ -46,10 +70,10 @@ if __name__ == '__main__' :
     # ground_3 = greedy_best_first_search(ground, source, goal)
     # print(ground_3)
     # visualize_map(ground_3)
-    ground_4 = graph_search_asterisk(ground, source, goal)
-    print(ground_4)
+    # ground_4 = graph_search_asterisk(ground, source, goal)
+    # print(ground_4)
     # visualize_map(ground_4)
-    visualize_map(ground_4, source, goal, num_obstacles, obstacles)
+    # visualize_map(ground_4, source, goal, num_obstacles, obstacles)
     # ground_5 = iterative_deepening_search(ground, source, goal)
     # print(ground_5)
     # visualize_map(ground_5)
