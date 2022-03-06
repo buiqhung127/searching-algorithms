@@ -49,15 +49,16 @@ if __name__ == '__main__' :
     cmd = input('>>')
 
     if cmd == '1':
-        new_ground = breadth_first_search(ground, source, goal) 
+        new_ground, cost = breadth_first_search(ground, source, goal) 
     elif cmd == '2':
-        new_ground = uniform_cost_search(ground, source, goal)
+        new_ground, cost= uniform_cost_search(ground, source, goal)
     elif cmd == '3':
-        new_ground = iterative_deepening_search(ground, source, goal)
+        new_ground, cost = iterative_deepening_search(ground, source, goal)
     elif cmd == '4':
-        new_ground = greedy_best_first_search(ground, source, goal)
+        new_ground, cost = greedy_best_first_search(ground, source, goal)
     elif cmd == '5':
-        new_ground = graph_search_asterisk(ground, source, goal)
+        new_ground, cost = graph_search_asterisk(ground, source, goal)
     print('Visualization in progress!')
-    visualize_map(new_ground, source, goal, num_obstacles, obstacles)        
+    visualize_map(new_ground, source, goal, num_obstacles, obstacles)       
+    print('Cost:', cost) 
     print('Visualization in done!')

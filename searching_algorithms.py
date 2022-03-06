@@ -60,14 +60,15 @@ def breadth_first_search(ground, source, goal) :
                 goal_found = True 
                 config.tracing_map[goal[0]][goal[1]] = (current_point[0], current_point[1])
                 break
-
+    cost = 0 # no source no goal
     if goal_found : 
         tracer = config.tracing_map[goal[0]][goal[1]]
         while tracer[0] != -1 and tracer[1] != -1:
+            cost += 1 
             ground[tracer[0]][tracer[1]] = config.path_notation
             tracer = config.tracing_map[tracer[0]][tracer[1]]
 
-    return ground
+    return ground, cost
 
 class MaxHeap() : 
     def __init__(self):
@@ -134,13 +135,14 @@ def uniform_cost_search(ground, source, goal) :
                 queue.push((new_step_x, new_step_y, new_step_trace, searching_config.cost_per_move))
                 config.is_visited[new_step_x][new_step_y] = 1
 
-
+    cost = 0 
     if goal_found : 
         tracer = config.tracing_map[goal[0]][goal[1]]
         while tracer[0] != -1 and tracer[1] != -1:
+            cost += 1
             ground[tracer[0]][tracer[1]] = config.path_notation
             tracer = config.tracing_map[tracer[0]][tracer[1]]
-    return ground
+    return ground, cost
 def manhattan_distance(first_point, second_point) : 
     return abs(second_point[0] - first_point[0]) + abs(second_point[1] - first_point[1]) 
 
@@ -176,12 +178,14 @@ def greedy_best_first_search(ground, source, goal) :
                 config.tracing_map[goal[0]][goal[1]] = (current_point[0], current_point[1])
                 break
 
+    cost = 0 
     if goal_found : 
         tracer = config.tracing_map[goal[0]][goal[1]]
         while tracer[0] != -1 and tracer[1] != -1:
+            cost += 1
             ground[tracer[0]][tracer[1]] = config.path_notation
             tracer = config.tracing_map[tracer[0]][tracer[1]]
-    return ground
+    return ground, cost
 
 def graph_search_asterisk(ground, source, goal) : # graph search asterisk 
     config = searching_config(ground)
@@ -214,13 +218,14 @@ def graph_search_asterisk(ground, source, goal) : # graph search asterisk
                 goal_found = True 
                 config.tracing_map[goal[0]][goal[1]] = (current_point[0], current_point[1])
                 break
-
+    cost = 0 
     if goal_found : 
         tracer = config.tracing_map[goal[0]][goal[1]]
         while tracer[0] != -1 and tracer[1] != -1:
+            cost += 1 
             ground[tracer[0]][tracer[1]] = config.path_notation
             tracer = config.tracing_map[tracer[0]][tracer[1]]
-    return ground
+    return ground, cost
 
 def depth_limited_first_search(current_point, current_depth, depth_limit, goal, tracer, config): 
     found_goal = False
@@ -233,7 +238,7 @@ def depth_limited_first_search(current_point, current_depth, depth_limit, goal, 
         if config.is_visited[new_step_x][new_step_y] == 0:
             config.is_visited[new_step_x][new_step_y] = 1
             temporary_tracer = tracer  
-            temporary_tracer.append((new_step_x, new_step_y))
+            temporary_tracer.append((new_step_x, new_step_y)) # include goal
             if (new_step_x, new_step_y) == goal :
                 found_goal = True
                 return found_goal, temporary_tracer
@@ -247,6 +252,7 @@ def iterative_deepening_search(ground, source, goal) :
     goal_found = False
     x, y = source
     source = (x, y)
+    cost = 0 
     max_deep = ground.shape[0] * ground.shape[1]
     original_ground = ground.copy()
     for depth_limit in range(max_deep): # in the original algorithm, max_deep is infinity 
@@ -259,8 +265,9 @@ def iterative_deepening_search(ground, source, goal) :
         temporary_found_goal, temporary_tracer = depth_limited_first_search(current_point, current_depth, depth_limit, goal, [], config)
         if temporary_found_goal:
             for i, point in enumerate(temporary_tracer):
+                cost += 1
                 ground[point[0]][point[1]] = config.path_notation
-            return ground
+            return ground, cost - 2 # no source no goal
 
 
-    return original_ground
+    return original_ground, cost
