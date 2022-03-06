@@ -53,10 +53,10 @@ def breadth_first_search(ground, source, goal) :
             new_step_x += step[0]
             new_step_y += step[1]
             new_step_trace = (current_point[0], current_point[1])
-            if config.is_visited[new_step_x][new_step_y] == 0:
+            if config.is_visited[new_step_x][new_step_y] == 0: # discard visited nodes 
                 queue.push((new_step_x, new_step_y, new_step_trace))
                 config.is_visited[new_step_x][new_step_y] = 1
-            if (new_step_x, new_step_y) == goal : 
+            if (new_step_x, new_step_y) == goal : # goal test
                 goal_found = True 
                 config.tracing_map[goal[0]][goal[1]] = (current_point[0], current_point[1])
                 break
@@ -122,18 +122,18 @@ def uniform_cost_search(ground, source, goal) :
         new_step_x = current_point[0]
         new_step_y = current_point[1]
 
+        if (new_step_x, new_step_y) == goal : 
+            goal_found = True 
+            break
+
         for step in config.agent_move : 
-            
             new_step_x += step[0]
             new_step_y += step[1]
             new_step_trace = (current_point[0], current_point[1])
             if config.is_visited[new_step_x][new_step_y] == 0:
                 queue.push((new_step_x, new_step_y, new_step_trace, searching_config.cost_per_move))
                 config.is_visited[new_step_x][new_step_y] = 1
-            if (new_step_x, new_step_y) == goal : 
-                goal_found = True 
-                config.tracing_map[goal[0]][goal[1]] = (current_point[0], current_point[1])
-                break
+
 
     if goal_found : 
         tracer = config.tracing_map[goal[0]][goal[1]]
@@ -248,7 +248,10 @@ def iterative_deepening_search(ground, source, goal) :
     x, y = source
     source = (x, y)
     max_deep = ground.shape[0] * ground.shape[1]
-    for depth_limit in range(max_deep):
+    original_ground = ground.copy()
+    for depth_limit in range(max_deep): # in the original algorithm, max_deep is infinity 
+        # but we now the limit of this problem so we just set the limit
+        ground = original_ground.copy()
         config = searching_config(ground)
         config.is_visited[x][y] = 1
         current_depth = 0
@@ -260,4 +263,4 @@ def iterative_deepening_search(ground, source, goal) :
             return ground
 
 
-    return ground
+    return original_ground

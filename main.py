@@ -61,22 +61,3 @@ if __name__ == '__main__' :
     print('Visualization in progress!')
     visualize_map(new_ground, source, goal, num_obstacles, obstacles)        
     print('Visualization in done!')
-    # ground_1 = breadth_first_search(ground, source, goal)
-    # print(ground_1)
-    # visualize_map(ground_1)
-    # ground_2 = uniform_cost_search(ground, source, goal)
-    # print(ground_2)
-    # visualize_map(ground_2)
-    # ground_3 = greedy_best_first_search(ground, source, goal)
-    # print(ground_3)
-    # visualize_map(ground_3)
-    # ground_4 = graph_search_asterisk(ground, source, goal)
-    # print(ground_4)
-    # visualize_map(ground_4)
-    # visualize_map(ground_4, source, goal, num_obstacles, obstacles)
-    # ground_5 = iterative_deepening_search(ground, source, goal)
-    # print(ground_5)
-    # visualize_map(ground_5)
-    # starting point
-    # obstacle point
-    # grid : done
