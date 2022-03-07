@@ -35,6 +35,7 @@ def read_file(file_name) :
 
 
 if __name__ == '__main__' : 
+    
     visualization_initialize()
     map_shape, source, goal, num_obstacles, obstacles = read_file(config.input_file)
 

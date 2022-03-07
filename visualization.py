@@ -4,7 +4,7 @@ from tkinter import *  # Python 3
 
 
 def visualization_initialize():
-    t.speed(10)
+    t.speed(36)
     t.pensize(1)
 
 def rectangle(hor, ver, col):

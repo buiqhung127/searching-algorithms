@@ -227,26 +227,31 @@ def graph_search_asterisk(ground, source, goal) : # graph search asterisk
             tracer = config.tracing_map[tracer[0]][tracer[1]]
     return ground, cost
 
-def depth_limited_first_search(current_point, current_depth, depth_limit, goal, tracer, config): 
+def depth_limited_first_search(source, current_point, current_depth, depth_limit, goal, tracer, config): 
     found_goal = False
-    if current_depth > depth_limit:
-        return False, []
+    if current_depth > depth_limit: # manhattan_distance(source, current_point) > depth_limit:
+        # print(len(tracer))
+        # print(config.is_visited.astype(int))
+        return False, tracer
     
     for step in config.agent_move :   
         new_step_x = current_point[0] + step[0]
         new_step_y = current_point[1] + step[1]
         if config.is_visited[new_step_x][new_step_y] == 0:
             config.is_visited[new_step_x][new_step_y] = 1
-            temporary_tracer = tracer  
+            temporary_tracer = tracer.copy()  
             temporary_tracer.append((new_step_x, new_step_y)) # include goal
             if (new_step_x, new_step_y) == goal :
                 found_goal = True
                 return found_goal, temporary_tracer
             else: 
-                temporary_found_goal, temporary_tracer = depth_limited_first_search((new_step_x, new_step_y), current_depth + 1, depth_limit, goal, temporary_tracer, config)
+                temporary_found_goal, temporary_tracer = depth_limited_first_search(source, (new_step_x, new_step_y), current_depth + 1, depth_limit, goal, temporary_tracer, config)
                 if temporary_found_goal == True:
                     return temporary_found_goal, temporary_tracer 
-    return False, [] 
+            # temporary_tracer.pop(len(temporary_tracer) - 1)
+            # config.is_visited[new_step_x][new_step_y] = 1
+
+    return False, tracer
 
 def iterative_deepening_search(ground, source, goal) : 
     goal_found = False
@@ -255,14 +260,15 @@ def iterative_deepening_search(ground, source, goal) :
     cost = 0 
     max_deep = ground.shape[0] * ground.shape[1]
     original_ground = ground.copy()
-    for depth_limit in range(max_deep): # in the original algorithm, max_deep is infinity 
-        # but we now the limit of this problem so we just set the limit
+    for depth_limit in range(max_deep):# [35]: #range(max_deep): # in the original algorithm, max_deep is infinity 
+        # but we know the limit of this problem so we just set the limit
         ground = original_ground.copy()
         config = searching_config(ground)
+        # print(config.is_visited.astype(int))
         config.is_visited[x][y] = 1
         current_depth = 0
         current_point = source
-        temporary_found_goal, temporary_tracer = depth_limited_first_search(current_point, current_depth, depth_limit, goal, [], config)
+        temporary_found_goal, temporary_tracer = depth_limited_first_search(source, current_point, current_depth, depth_limit, goal, [], config)
         if temporary_found_goal:
             for i, point in enumerate(temporary_tracer):
                 cost += 1
